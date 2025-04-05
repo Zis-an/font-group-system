@@ -1,120 +1,257 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  h2, h3 {
-    color: #333;
-  }
-  
-  form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-  }
-  
-  input[type="text"],
-  select {
-    padding: 8px;
-    width: 100%;
-    max-width: 400px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    background-color: #007bff;
-    color: #fff;
-    padding: 8px 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  #fontList div,
-  #fontGroupList div {
-    background: #fff;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 6px;
-  }
-  
-  .font-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .removeRow {
-    background-color: #dc3545;
-  }
-  
-  .removeRow:hover {
-    background-color: #c82333;
-  }
-  
-  #groupStatus p {
-    font-weight: bold;
-  }
-  
-  hr {
-    margin: 40px 0;
-  }
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  /* background-color: #f9f9f9; */
+}
 
 
-  .group-box {
-    border: 1px solid #ddd;
-    background: #fff;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  }
-  
-  .group-header {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #222;
-  }
-  
-  .group-fonts {
-    margin-bottom: 12px;
-    color: #555;
-  }
-  
-  .group-actions button {
-    padding: 6px 12px;
-    margin-right: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-  }
-  
-  .group-actions .editGroup {
-    background-color: #ffc107;
-    color: #000;
-  }
-  
-  .group-actions .editGroup:hover {
-    background-color: #e0a800;
-  }
-  
-  .group-actions .deleteGroup {
-    background-color: #dc3545;
-    color: #fff;
-  }
-  
-  .group-actions .deleteGroup:hover {
-    background-color: #c82333;
-  }
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.page-center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 20vh;
+  width: 100%;
+}
+
+.upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dotted #ccc;
+  border-radius: 20px;
+  padding: 20px;
+  width: 50%;
+  height: 200px;
+  position: relative;
+  background-color: #f9fafb;
+}
+
+.upload-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-text {
+  color: #777;
+  margin-top: 10px;
+}
+
+
+
+
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+/* Font Preview Styles */
+.font-preview {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* Delete Button Styles */
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+h2,
+h3 {
+  color: #333;
+}
+
+form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+input[type="text"],
+select {
+  padding: 8px;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#fontList div,
+#fontGroupList div {
+  background: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 6px;
+}
+
+.font-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.removeRow {
+  background-color: #dc3545;
+}
+
+.removeRow:hover {
+  background-color: #c82333;
+}
+
+#groupStatus p {
+  font-weight: bold;
+}
+
+hr {
+  margin: 40px 0;
+}
+
+
+.group-box {
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.group-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.group-fonts {
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.group-actions button {
+  padding: 6px 12px;
+  margin-right: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.group-actions .editGroup {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.group-actions .editGroup:hover {
+  background-color: #e0a800;
+}
+
+.group-actions .deleteGroup {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.group-actions .deleteGroup:hover {
+  background-color: #c82333;
+}
