@@ -1,0 +1,20 @@
+CREATE TABLE fonts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    font_name VARCHAR(255) NOT NULL,
+    font_file VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE font_groups (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE font_group_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_id INT NOT NULL,
+    font_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES font_groups(id) ON DELETE CASCADE,
+    FOREIGN KEY (font_id) REFERENCES fonts(id) ON DELETE CASCADE
+);
