@@ -27,13 +27,6 @@
 </head>
 
 <body>
-    <!-- <h2 class="upload-font-text">Upload Font (.ttf only)</h2> -->
-    <!-- <input type="file" id="fontFile" accept=".ttf" /> -->
-
-
-
-
-
     <div class="page-center-wrapper">
         <div class="upload-container">
             <input type="file" id="fontFile" accept=".ttf" class="upload-input" />
@@ -41,23 +34,17 @@
         </div>
     </div>
 
-
-
-
-
     <div id="uploadStatus"></div>
     
     <hr>
 
     <div id="fontList"></div>
 
-
     <hr>
 
     <h3>Create Font Group</h3>
     <form id="fontGroupForm">
         <input type="text" name="group_name" placeholder="Group Name" required><br><br>
-
         <div id="fontRows">
             <div class="font-row">
                 <select name="fonts[]" class="font-select">
