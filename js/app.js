@@ -12,8 +12,6 @@ $(document).ready(function () {
   handleGroupActions();
 });
 
-
-
 // ========================== //
 // Handle Font Upload         //
 // ========================== //
@@ -21,7 +19,7 @@ function handleFontUpload() {
   $('#fontFile').on('change', function () {
     const file = this.files[0];
 
-    // Check if file is a .ttf
+    // Check if the file is a .ttf
     if (!file || file.type !== 'font/ttf' && !file.name.endsWith('.ttf')) {
       alert('Please upload a .ttf file only.');
       return;
@@ -39,12 +37,10 @@ function handleFontUpload() {
       processData: false,
       success: function (res) {
         const data = JSON.parse(res);
-        if (data.success) {
-          $('#uploadStatus').html('<p style="color:green;">Font uploaded successfully!</p>');
-          loadFonts();
-        } else {
-          $('#uploadStatus').html('<p style="color:red;">' + data.message + '</p>');
-        }
+        $('#uploadStatus').html(data.success ?
+          '<p style="color:green;">Font uploaded successfully!</p>' :
+          '<p style="color:red;">' + data.message + '</p>');
+        if (data.success) loadFonts();
       },
       error: function () {
         $('#uploadStatus').html('<p style="color:red;">Something went wrong!</p>');
@@ -52,8 +48,6 @@ function handleFontUpload() {
     });
   });
 }
-
-
 
 // ========================== //
 // Load Fonts Functionality   //
@@ -64,16 +58,13 @@ function loadFonts() {
   });
 }
 
-
-
 // ========================== //
 // Handle Font Deletion       //
 // ========================== //
 function handleFontDelete() {
   $(document).on('click', '.delete-btn', function () {
-    const fontId = $(this).data('font-id'); // Get the font ID from the data-font-id attribute
-    
-    // Confirm before deletion
+    const fontId = $(this).data('font-id');
+
     if (confirm('Are you sure you want to delete this font?')) {
       $.ajax({
         url: 'api/delete_font.php',
@@ -82,7 +73,6 @@ function handleFontDelete() {
         success: function (response) {
           const result = JSON.parse(response);
           if (result.success) {
-            // On success, remove the font row from the table
             $('button[data-font-id="' + fontId + '"]').closest('tr').remove();
           } else {
             alert('Failed to delete the font.');
@@ -96,42 +86,52 @@ function handleFontDelete() {
   });
 }
 
-
-
-
 // ========================== //
 // Load Font Options          //
 // ========================== //
-function loadFontOptions(callback) {
+function loadFontOptions(targetSelect = null, callback = null) {
   $.get('api/get_font_options.php', function (options) {
-    $('.font-select').each(function () {
-      $(this).html('<option value="">Select Font</option>' + options);
-    });
+    if (targetSelect) {
+      $(targetSelect).html('<option value="">Select Font</option>' + options);
+    } else {
+      $('.font-select').each(function () {
+        $(this).html('<option value="">Select Font</option>' + options);
+      });
+    }
     if (callback) callback();
   });
 }
-
-
-
 
 // ========================== //
 // Add/Remove Font Rows       //
 // ========================== //
 $('#addRow').on('click', function () {
-  const newRow = `<div class="font-row">
-    <select name="fonts[]" class="font-select"></select>
-    <button type="button" class="removeRow">Remove</button>
-  </div>`;
+  const newRow = $(`
+    <div class="font-row">
+      <select name="fonts[]" class="font-select"></select>
+        <span class="removeRow" aria-label="Remove">&times;</span>
+    </div>
+  `);
+
+
+  // <div class="font-row">
+  //     <select name="fonts[]" class="font-select"></select>
+  //     <button type="button" class="removeRow">
+  //       <span>&times;</span>
+  //     </button>
+  // </div>
+
   $('#fontRows').append(newRow);
-  loadFontOptions();
+
+  // Load font options for the new select element
+  const newSelect = newRow.find('select');
+  loadFontOptions(newSelect);
 });
 
+// Remove a font row on click
 $(document).on('click', '.removeRow', function () {
   $(this).closest('.font-row').remove();
 });
-
-
-
 
 // ========================== //
 // Handle Group Creation/Update //
@@ -143,7 +143,6 @@ $('#fontGroupForm').on('submit', function (e) {
     return $(this).val();
   }).get().filter(Boolean);
 
-  // Check if at least 2 fonts are selected
   if (selectedFonts.length < 2) {
     $('#groupStatus').html('<p style="color:red;">Select at least 2 fonts to create a group.</p>');
     return;
@@ -153,19 +152,16 @@ $('#fontGroupForm').on('submit', function (e) {
 
   $.post('api/create_group.php', formData, function (res) {
     const data = JSON.parse(res);
+    $('#groupStatus').html(data.success ?
+      '<p style="color:green;">' + data.message + '</p>' :
+      '<p style="color:red;">' + data.message + '</p>');
     if (data.success) {
-      $('#groupStatus').html('<p style="color:green;">' + data.message + '</p>');
       resetGroupForm();
       loadFontOptions();
       loadGroups();
-    } else {
-      $('#groupStatus').html('<p style="color:red;">' + data.message + '</p>');
     }
   });
 });
-
-
-
 
 // ========================== //
 // Load Groups Functionality  //
@@ -175,9 +171,6 @@ function loadGroups() {
     $('#fontGroupList').html(res);
   });
 }
-
-
-
 
 // ========================== //
 // Handle Group Actions (Edit/Delete) //
@@ -189,9 +182,7 @@ function handleGroupActions() {
     if (confirm('Are you sure?')) {
       $.post('api/delete_group.php', { id }, function (res) {
         const data = JSON.parse(res);
-        if (data.success) {
-          loadGroups();
-        }
+        if (data.success) loadGroups();
       });
     }
   });
@@ -199,7 +190,7 @@ function handleGroupActions() {
   // Edit group action
   $(document).on('click', '.editGroup', function () {
     const groupId = $(this).data('id');
-  
+
     $.get('api/get_group_by_id.php', { id: groupId }, function (res) {
       const data = JSON.parse(res);
       if (data.success) {
@@ -208,9 +199,6 @@ function handleGroupActions() {
     });
   });
 }
-
-
-
 
 // ========================== //
 // Reset Group Form          //
@@ -222,9 +210,6 @@ function resetGroupForm() {
   $('#fontGroupForm button[type="submit"]').text('Create Group');
 }
 
-
-
-
 // ========================== //
 // Update Group Form with Data //
 // ========================== //
@@ -232,17 +217,24 @@ function updateGroupForm(data) {
   $('input[name="group_name"]').val(data.group.group_name);
   $('#fontRows').empty();
 
+  // Create the necessary rows for the selected fonts
   data.fonts.forEach(fontId => {
     const row = `<div class="font-row">
       <select name="fonts[]" class="font-select"></select>
-      <button type="button" class="removeRow">Remove</button>
+      <button type="button" class="removeRow">
+        <span>&times;</span>
+      </button>
     </div>`;
     $('#fontRows').append(row);
   });
 
+  // Load font options and then set the selected value
   loadFontOptions(() => {
     $('.font-select').each((i, el) => {
-      $(el).val(data.fonts[i]);
+      $.get('api/get_font_options.php', function (options) {
+        $(el).html('<option value="">Select Font</option>' + options);
+        $(el).val(data.fonts[i]);
+      });
     });
   });
 

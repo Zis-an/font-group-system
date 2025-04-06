@@ -35,7 +35,7 @@
     </div>
 
     <div id="uploadStatus"></div>
-    
+
     <hr>
 
     <div id="fontList"></div>
@@ -48,7 +48,6 @@
         <div id="fontRows">
             <div class="font-row">
                 <select name="fonts[]" class="font-select">
-                    <!-- Will be filled by JS -->
                 </select>
             </div>
         </div>
@@ -56,6 +55,7 @@
         <button type="button" id="addRow">Add Row</button>
         <button type="submit">Create Group</button>
     </form>
+
 
     <div id="groupStatus"></div>
 
