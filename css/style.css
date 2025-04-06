@@ -109,6 +109,55 @@ th {
 
 
 
+.font-group-table {
+  width: 100%; /* Adjust as needed */
+  border-collapse: collapse;
+  margin-top: 10px; /* Adjust spacing */
+}
+
+.font-group-table th, .font-group-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #ddd; /* Light gray bottom border */
+  text-align: left;
+}
+
+.font-group-table th {
+  background-color: #f2f2f2; /* Light gray background for header */
+  font-weight: bold;
+}
+
+.font-group-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9; /* Slightly different background for even rows */
+}
+
+.group-actions-cell button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9em; /* Adjust font size */
+}
+
+.group-actions-cell button.editGroup {
+  background-color: #e0f7fa; /* Light blue for edit */
+  color: #00897b;
+}
+
+.group-actions-cell button.deleteGroup {
+  background-color: #ffebee; /* Light red for delete */
+  color: #d32f2f;
+}
+
+.group-fonts em {
+  color: #777; /* Style for "No fonts assigned" */
+  font-style: italic;
+}
+
+
+
+
+
 
 
 
